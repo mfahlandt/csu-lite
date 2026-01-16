@@ -1,0 +1,31 @@
+{{ define "main" }}
+<div class="container py-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4 text-csu-blue">{{ .Title }}</h1>
+            <p class="lead text-muted">{{ .Content }}</p>
+        </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        {{ range .Site.Data.vorstand }}
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 text-center">
+                {{ if .image }}
+                <img src="{{ .image | relURL }}" class="card-img-top" alt="{{ .name }}">
+                {{ else }}
+                <img src="https://via.placeholder.com/400x400.png?text=Kein+Bild" class="card-img-top" alt="{{ .name }}">
+                {{ end }}
+                <div class="card-body">
+                    <h5 class="card-title">{{ .name }}</h5>
+                    <p class="card-text fw-bold text-csu-blue">{{ .position }}</p>
+                    {{ if .quote }}
+                    <p class="text-muted">"{{ .quote }}"</p>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

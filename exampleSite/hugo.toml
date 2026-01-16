@@ -1,0 +1,75 @@
+baseURL = 'https://example.com/'
+languageCode = 'de-de'
+title = 'CSU Musterstadt'
+theme = 'csu-lite'
+
+[params]
+  description = "Offizielle Website des CSU Ortsverbands Musterstadt"
+  heroImage = "images/hero.jpg" # Dummy image path
+
+  logo = "images/logo.png"
+  logoAlt = "CSU Logo"
+
+  [params.election]
+    enabled = true
+    date = "Am 8. März"
+    text = "CSU wählen!"
+    icon = "fas fa-times"
+
+[params.homepage]
+  heroTitle = "Willkommen beim CSU-Ortsverband Musterstadt"
+  heroSubtitle = "Gestalten Sie mit uns die Zukunft."
+  newsTitle = "Aktuelles"
+  teamTitle = "Unser Team"
+  teamButtonText = "Zum Vorstand"
+  teamImage = "images/team.jpg"
+
+  [params.homepage.highlightBox]
+    enabled = true
+    badgeText = "Wahl 2026"
+    badgeClass = "bg-csu-green"
+    title = "Kommunalwahl 2026"
+    content = "Unsere Kandidaten und Ziele."
+    url = "/kommunalwahl-2026/"
+    linkText = "Mehr erfahren"
+
+[params.footer]
+  description = "Näher am Menschen."
+  contactPerson = "Max Mustermann"
+  address = "Musterstraße 1, 12345 Musterstadt"
+  email = "info@example.com"
+
+[params.kommunalwahl]
+  mayorCandidateTitle = "Unser Bürgermeisterkandidat"
+  countyCandidateTitle = "Für den Kreistag"
+  localCandidatesTitle = "Für den Gemeinderat"
+  goalsTitle = "Unsere Ziele"
+
+[permalinks]
+  aktuelles = "/aktuelles/:slug/"
+
+[menu]
+  [[menu.main]]
+    name = "Start"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    name = "Aktuelles"
+    url = "/aktuelles/"
+    weight = 20
+  [[menu.main]]
+    name = "Termine"
+    url = "/termine/"
+    weight = 30
+  [[menu.main]]
+    name = "Vorstand"
+    url = "/vorstand/"
+    weight = 40
+  [[menu.main]]
+    name = "Kommunalwahl"
+    url = "/kommunalwahl-2026/"
+    weight = 50
+  [[menu.main]]
+    name = "Kontakt"
+    url = "/kontakt/"
+    weight = 60

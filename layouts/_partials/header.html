@@ -1,0 +1,24 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-csu-blue shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-uppercase" href="{{ .Site.BaseURL }}">
+                {{ with .Site.Params.logo }}
+                <img src="{{ . | relURL }}" alt="{{ $.Site.Params.logoAlt | default "Logo" }}" height="50" class="d-inline-block align-text-top me-2">
+                {{ end }}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav text-uppercase fw-bold">
+                    {{ $currentPage := . }}
+                    {{ range .Site.Menus.main }}
+                    <li class="nav-item">
+                        <a class="nav-link {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

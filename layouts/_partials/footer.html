@@ -1,0 +1,52 @@
+<footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-start">
+        <div class="row">
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                <h6 class="text-uppercase fw-bold">{{ .Site.Title }}</h6>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: var(--csu-blue); height: 2px"/>
+                <p>
+                    {{ .Site.Params.footer.description | default "Näher am Menschen. Wir gestalten die Zukunft unserer Heimat." }}
+                </p>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <h6 class="text-uppercase fw-bold">Navigation</h6>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: var(--csu-blue); height: 2px"/>
+                <p><a href="/" class="text-white">Startseite</a></p>
+                <p><a href="/aktuelles" class="text-white">Aktuelles</a></p>
+                <p><a href="/termine" class="text-white">Termine</a></p>
+                <p><a href="/vorstand" class="text-white">Vorstand</a></p>
+            </div>
+
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                <h6 class="text-uppercase fw-bold">Folgen Sie uns</h6>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: var(--csu-blue); height: 2px"/>
+                {{ with .Site.Params.socials.links }}
+                <div class="d-flex justify-content-center justify-content-md-start mt-3">
+                    {{ range . }}
+                    <a href="{{ .url }}" target="_blank" rel="noopener" class="text-white me-3 fs-4">
+                        <i class="{{ .icon }}"></i>
+                    </a>
+                    {{ end }}
+                </div>
+                {{ else }}
+                <p class="text-muted">Keine Social Media Links konfiguriert.</p>
+                {{ end }}
+            </div>
+
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <h6 class="text-uppercase fw-bold">Kontakt</h6>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: var(--csu-blue); height: 2px"/>
+                <p>{{ .Site.Params.footer.contactPerson | default "Vorsitzender Max Mustermann" }}</p>
+                <p>{{ .Site.Params.footer.address | default "Musterstraße 1, 95706 Schirnding" }}</p>
+                <p><a href="mailto:{{ .Site.Params.footer.email | default "info@csu-schirnding.de" }}" class="text-white">{{ .Site.Params.footer.email | default "info@csu-schirnding.de" }}</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © {{ now.Format "2006" }} Copyright:
+        <a class="text-white" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+        | <a href="/impressum" class="text-white">Impressum</a>
+        | <a href="/datenschutz" class="text-white">Datenschutz</a>
+    </div>
+</footer>

@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-5 fw-bold text-csu-blue">{{ .Title }}</h1>
+            {{ if eq .Type "termine" }}
+                <p class="text-muted"><i class="far fa-calendar-alt me-2"></i>{{ .Params.eventDate | time.Format "02. Januar 2006, 15:04 Uhr" }}</p>
+                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>{{ .Params.location }}</p>
+            {{ else }}
+                <p class="text-muted">{{ .Date.Format "02. Januar 2006" }}</p>
+            {{ end }}
+            {{ if .Params.image }}
+                <img src="{{ .Params.image | relURL }}" class="img-fluid rounded my-4" alt="{{ .Title }}">
+            {{ end }}
+            <div class="content">
+                {{ .Content }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}

@@ -1,0 +1,16 @@
+name = "CSU-Lite"
+license = "Apache-2.0"
+licenselink = "https://github.com/mfahlandt/csu-lite/blob/main/LICENSE"
+description = "Ein modernes, responsives Hugo-Theme für CSU-Ortsverbände."
+homepage = "https://github.com/mfahlandt/csu-lite"
+tags = ["politics", "csu", "responsive", "bootstrap", "clean"]
+features = ["blog", "events", "people", "responsive"]
+min_version = "0.110.0"
+
+[author]
+  name = "Mario Fahlandt"
+  homepage = "https://github.com/mfahlandt"
+
+# Wenn du das Theme in der Hugo Registry haben willst, brauchst du diese Bilder im Theme-Root:
+# images/screenshot.png (1500x1000px)
+# images/tn.png (900x600px)

@@ -1,0 +1,45 @@
+{{ define "main" }}
+<div class="container py-5">
+    <!-- Header section -->
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4 text-csu-blue">Unsere Termine</h1>
+            <p class="lead text-muted">Hier finden Sie eine Übersicht über unsere kommenden Veranstaltungen.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="timeline">
+                {{/* 1. Get all relevant pages */}}
+                {{ $all := where .Site.RegularPages "Type" "termine" }}
+
+                {{ $today := now.Format "2006-01-02" | time }}
+                {{ $sortedTermine := (where .Site.RegularPages "Type" "termine").ByParam "event_date" }}
+                {{ $upcoming := slice }}
+                {{ range $sortedTermine }}
+                {{ if ge (.Params.event_date | time) $today }}
+                {{ $upcoming = $upcoming | append . }}
+                {{ end }}
+                {{ end }}
+
+                {{ range $upcoming.ByParam "event_date" }}
+                <div class="timeline-item">
+                    {{/* CAST to time here to prevent the Format error */}}
+                    <div class="timeline-date">{{ (time .Params.event_date).Format "02. Jan 2006" }}</div>
+                    <div class="timeline-content">
+                        <div class="timeline-icon"><i class="{{ .Params.icon | default "far fa-calendar-alt" }}"></i></div>
+                        <h3 class="h4">{{ .Title }}</h3>
+                        <span class="badge bg-csu-blue mb-2">{{ .Params.category }}</span>
+                        <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>{{ .Params.location }}</p>
+                        <div class="mt-3">{{ .Content }}</div>
+                    </div>
+                </div>
+                {{ else }}
+                <p class="text-center text-muted">Aktuell sind keine kommenden Termine geplant.</p>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}

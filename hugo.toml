@@ -1,0 +1,26 @@
+baseURL = 'https://www.csu-schirnding.de/'
+languageCode = 'de-de'
+title = 'CSU Schirnding'
+theme = 'csu-lite'
+
+[params]
+  description = "Offizielle Website des CSU Ortsverbands Schirnding"
+  heroImage = "images/schirnding-panorama.jpg" # Bild in static/images ablegen!
+
+[menu]
+  [[menu.main]]
+    name = "Startseite"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    name = "Aktuelles"
+    url = "/post/"
+    weight = 20
+  [[menu.main]]
+    name = "Über uns"
+    url = "/about/"
+    weight = 30
+  [[menu.main]]
+    name = "Kontakt"
+    url = "/kontakt/"
+    weight = 40

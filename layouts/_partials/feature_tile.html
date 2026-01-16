@@ -1,0 +1,10 @@
+{{ $badge_class := .badge_class | default "bg-csu-blue" }}
+
+<div class="feature-tile h-100">
+    {{ with .badge_text }}
+    <span class="badge {{ $badge_class }} mb-3">{{ . }}</span>
+    {{ end }}
+    <h3>{{ .title }}</h3>
+    <p>{{ .content | safeHTML }}</p>
+    <a href="{{ .url }}" class="btn btn-csu">{{ .link_text }}</a>
+</div>

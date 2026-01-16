@@ -1,0 +1,13 @@
+- name: "Anna Beispiel"
+  listenplatz: 1
+  beruf: "Lehrerin"
+  alter: 45
+  image: ""
+  quote: "Bildung ist Zukunft."
+
+- name: "Bernd Muster"
+  listenplatz: 2
+  beruf: "Handwerker"
+  alter: 32
+  image: ""
+  quote: "Anpacken für Musterstadt."

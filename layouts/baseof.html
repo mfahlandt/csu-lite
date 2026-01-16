@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{.Title }} | {{.Site.Title }}</title>
+
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "/css/all.min.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "/css/style.css" | relURL }}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+{{/* Globaler Wahl-Störer (Top Bar) */}}
+{{ if .Site.Params.election.enabled }}
+<div class="election-top-bar">
+    <span class="election-date">{{ .Site.Params.election.date }}</span>
+    <span class="election-text">{{ .Site.Params.election.text }}</span>
+    <span class="election-icon ms-2"><i class="{{ .Site.Params.election.icon }} border border-white p-1 rounded-1"></i></span>
+</div>
+{{ end }}
+
+{{ partial "header.html" . }}
+
+<main class="flex-grow-1">
+  {{ block "main". }}{{ end }}
+</main>
+
+{{ partial "footer.html" . }}
+
+<!-- Local JS -->
+<script src="{{ "/js/bootstrap.bundle.min.js" | relURL }}"></script>
+</body>
+</html>
