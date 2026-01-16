@@ -16,6 +16,7 @@ Ein sauberes, modernes und konfigurierbares Hugo-Theme, das für CSU-Ortsverbän
     *   Globaler "Wahl-Störer" (Top-Bar).
     *   Automatische Termin-Box auf der Startseite.
     *   Highlight-Box auf der Startseite.
+    *   Integriertes Kontaktformular (via Formspree).
 
 ## Installation & Verwendung
 
@@ -86,6 +87,12 @@ hugo server
   icon = "fas fa-times"
 ```
 
+### Kontaktformular (`[params.contact]`)
+```toml
+[params.contact]
+  formspreeID = "deine-formspree-id" # Erstelle ein Formular auf formspree.io
+```
+
 ### Kommunalwahl (`[params.kommunalwahl]`)
 ```toml
 [params.kommunalwahl]
@@ -93,6 +100,24 @@ hugo server
   countyCandidateTitle = "Unsere Kandidatin für den Kreistag"
   localCandidatesTitle = "Unsere Kandidaten für den Gemeinderat"
   goalsTitle = "Unsere Schwerpunkte"
+```
+
+### Datenschutz (`[privacy]`)
+Um externe Verbindungen (z.B. YouTube, Vimeo) datenschutzkonform zu laden:
+
+```toml
+[privacy]
+  [privacy.vimeo]
+    disabled = false
+    simple = true
+    enableDNT = true
+  [privacy.twitter]
+    disabled = false
+    simple = true
+    enableDNT = true
+  [privacy.youtube]
+    disabled = false
+    privacyEnhanced = true
 ```
 
 ## Daten-Management (`data/`)

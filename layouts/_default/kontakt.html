@@ -9,7 +9,7 @@
     </div>
 
     <div class="row g-5">
-        {{/* Contact Info & Map */}}
+        {{/* Contact Info */}}
         <div class="col-lg-6">
             <h3 class="text-csu-blue mb-4">Anschrift & Erreichbarkeit</h3>
             <p>
@@ -20,18 +20,12 @@
             <p>
                 <strong>E-Mail:</strong> <a href="mailto:{{ .Site.Params.footer.email }}">{{ .Site.Params.footer.email }}</a>
             </p>
-
-            {{/* Placeholder for a map */}}
-            <div class="mt-4">
-                <img src="https://via.placeholder.com/600x400.png?text=Hier+könnte+eine+Karte+sein" class="img-fluid rounded" alt="Karten-Platzhalter">
-                <small class="text-muted">Eine interaktive Karte kann hier eingebettet werden.</small>
-            </div>
         </div>
 
         {{/* Contact Form */}}
         <div class="col-lg-6">
             <h3 class="text-csu-blue mb-4">Schreiben Sie uns eine Nachricht</h3>
-            <form action="https://formspree.io/f/your_form_id" method="POST">
+            <form action="https://formspree.io/f/{{ .Site.Params.contact.formspreeID }}" method="POST">
                 <div class="mb-3">
                     <label for="name" class="form-label">Ihr Name</label>
                     <input type="text" class="form-control" id="name" name="name" required>
@@ -48,7 +42,6 @@
                     <button type="submit" class="btn btn-csu btn-lg">Nachricht senden</button>
                 </div>
             </form>
-            <small class="text-muted mt-2 d-block">Hinweis: Dieses Formular benötigt einen externen Dienst wie <a href="https://formspree.io/">Formspree</a>, um zu funktionieren. Sie müssen die `action`-URL im Code anpassen.</small>
         </div>
     </div>
 </div>
