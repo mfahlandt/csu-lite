@@ -27,10 +27,10 @@ Der empfohlene Weg ist die Installation als Git Submodule. So kannst du das Them
 Führe folgenden Befehl im Hauptverzeichnis deiner Hugo-Webseite aus:
 
 ```bash
-git submodule add https://github.com/DEIN-USERNAME/csu-lite.git themes/csu-lite
+git submodule add https://github.com/mfahlandt/csu-lite.git themes/csu-lite
 ```
 
-*(Ersetze `https://github.com/DEIN-USERNAME/csu-lite.git` mit der tatsächlichen URL dieses Repositories)*
+*(Ersetze `https://github.com/mfahlandt/csu-lite.git` mit der tatsächlichen URL dieses Repositories)*
 
 Alternativ kannst du das Theme auch herunterladen und manuell in den `themes/`-Ordner entpacken.
 
@@ -56,6 +56,36 @@ Starte den Hugo-Server:
 ```bash
 hugo server
 ```
+
+## Workflow: Änderungen & Updates (WICHTIG!)
+
+Wenn du das Theme als **Git Submodule** nutzt und Änderungen am Theme-Code (HTML, CSS) vornimmst, musst du einen speziellen Workflow beachten, damit die Änderungen auch auf deiner Live-Seite (z.B. GitHub Pages) ankommen.
+
+### Schritt 1: Änderungen im Theme speichern
+Gehe in den Theme-Ordner, committe und pushe deine Änderungen an das Theme-Repository:
+
+```bash
+cd themes/csu-lite
+git add .
+git commit -m "Beschreibung deiner Änderung"
+git push origin main
+```
+
+### Schritt 2: Hauptprojekt aktualisieren
+Gehe zurück in dein Hauptverzeichnis. Du musst dem Hauptprojekt mitteilen, dass es eine neue Version des Themes verwenden soll:
+
+```bash
+cd ../..
+# Aktualisiert das Submodule auf den neuesten Stand
+git submodule update --remote --merge
+
+# Speichert diesen neuen Stand im Hauptprojekt
+git add themes/csu-lite
+git commit -m "Update Theme auf neueste Version"
+git push origin main
+```
+
+**Nur wenn du beide Schritte ausführst, wird deine Webseite mit den neuesten Theme-Änderungen neu gebaut!**
 
 ## Konfiguration (`hugo.toml`)
 
