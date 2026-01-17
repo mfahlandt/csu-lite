@@ -17,6 +17,7 @@ Ein sauberes, modernes und konfigurierbares Hugo-Theme, das für CSU-Ortsverbän
     *   Automatische Termin-Box auf der Startseite.
     *   Highlight-Box auf der Startseite.
     *   Integriertes Kontaktformular (via Formspree).
+    *   **SEO-Optimiert:** Automatische Meta-Tags, Canonical URLs und Schema.org Structured Data.
 
 ## Installation & Verwendung
 
@@ -148,6 +149,15 @@ Um externe Verbindungen (z.B. YouTube, Vimeo) datenschutzkonform zu laden:
   [privacy.youtube]
     disabled = false
     privacyEnhanced = true
+```
+
+### SEO & Meta-Tags
+Das Theme generiert automatisch Meta-Tags, Canonical URLs und Schema.org Structured Data. Du kannst globale Keywords definieren:
+
+```toml
+[params]
+  description = "Beschreibung deiner Seite"
+  keywords = ["CSU", "Ort", "Politik"]
 ```
 
 ## Daten-Management (`data/`)

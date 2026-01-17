@@ -3,7 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{.Title }} | {{.Site.Title }}</title>
+
+  {{/* Canonical URL (Important for SEO) */}}
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  {{/* Dynamic Title */}}
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+  {{/* Dynamic Description */}}
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+
+  {{/* Dynamic Keywords */}}
+  {{ with .Params.keywords }}
+  <meta name="keywords" content="{{ delimit . ", " }}">
+  {{ else }}
+  {{ with .Site.Params.keywords }}
+  <meta name="keywords" content="{{ delimit . ", " }}">
+  {{ end }}
+  {{ end }}
+
+  {{/* Open Graph & Twitter Cards */}}
+  {{ template "_internal/opengraph.html" . }}
+  {{ template "_internal/twitter_cards.html" . }}
+
+  {{/* Structured Data (Schema.org) */}}
+  {{ partial "seo_schema.html" . }}
 
   <!-- Local CSS -->
   <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | relURL }}">

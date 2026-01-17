@@ -3,13 +3,29 @@ languageCode = 'de-de'
 title = 'CSU Musterstadt'
 theme = 'csu-lite'
 
+# Datenschutz-Einstellungen
+[privacy]
+  [privacy.vimeo]
+    disabled = false
+    simple = true
+    enableDNT = true
+  [privacy.twitter]
+    disabled = false
+    simple = true
+    enableDNT = true
+  [privacy.youtube]
+    disabled = false
+    privacyEnhanced = true
+
 [params]
   description = "Offizielle Website des CSU Ortsverbands Musterstadt"
-  heroImage = "images/hero.jpg" # Dummy image path
+  keywords = ["CSU", "Musterstadt", "Politik", "Bayern"]
+  heroImage = "images/hero.jpg"
 
   logo = "images/logo.png"
   logoAlt = "CSU Logo"
 
+  # Globaler Wahl-Störer (Top Bar)
   [params.election]
     enabled = true
     date = "Am 8. März"
@@ -23,6 +39,7 @@ theme = 'csu-lite'
   teamTitle = "Unser Team"
   teamButtonText = "Zum Vorstand"
   teamImage = "images/team.jpg"
+  teamImageAlt = "Unser Team"
 
   [params.homepage.highlightBox]
     enabled = true
@@ -38,6 +55,9 @@ theme = 'csu-lite'
   contactPerson = "Max Mustermann"
   address = "Musterstraße 1, 12345 Musterstadt"
   email = "info@example.com"
+
+[params.contact]
+  formspreeID = "deine-formspree-id"
 
 [params.kommunalwahl]
   mayorCandidateTitle = "Unser Bürgermeisterkandidat"
