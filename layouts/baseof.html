@@ -26,6 +26,16 @@
   {{ template "_internal/opengraph.html" . }}
   {{ template "_internal/twitter_cards.html" . }}
 
+  {{/* Fallback og:image & twitter:image wenn Hugo-Internes keins gesetzt hat */}}
+  {{- $ogImage := "" -}}
+  {{- with .Params.image -}}{{ $ogImage = . | absURL }}{{- end -}}
+  {{- if not $ogImage -}}{{- with .Site.Params.ogImage -}}{{ $ogImage = . | absURL }}{{- end -}}{{- end -}}
+  {{- if not $ogImage -}}{{- with .Site.Params.logo -}}{{ $ogImage = . | absURL }}{{- end -}}{{- end -}}
+  {{- if $ogImage }}
+  <meta property="og:image" content="{{ $ogImage }}">
+  <meta name="twitter:image" content="{{ $ogImage }}">
+  {{- end }}
+
   {{/* Structured Data (Schema.org) */}}
   {{ partial "seo_schema.html" . }}
 

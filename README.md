@@ -158,6 +158,7 @@ Das Theme generiert automatisch Meta-Tags, Canonical URLs und Schema.org Structu
 [params]
   description = "Beschreibung deiner Seite"
   keywords = ["CSU", "Ort", "Politik"]
+  ogImage = "images/og-preview.jpg"  # Vorschaubild für Social Media (1200x630px empfohlen)
 ```
 
 ### robots.txt & Sitemap
