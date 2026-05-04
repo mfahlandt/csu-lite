@@ -160,6 +160,33 @@ Das Theme generiert automatisch Meta-Tags, Canonical URLs und Schema.org Structu
   keywords = ["CSU", "Ort", "Politik"]
 ```
 
+### robots.txt & Sitemap
+
+Damit Suchmaschinen die Seite korrekt indizieren können, solltest du eine `robots.txt` im `static/`-Ordner deines Projekts anlegen:
+
+**`static/robots.txt`:**
+```
+User-agent: *
+Allow: /
+
+Sitemap: https://www.deine-domain.de/sitemap.xml
+```
+
+Hugo generiert automatisch eine `sitemap.xml`. Die `robots.txt` verweist Suchmaschinen darauf.
+
+### Startseite (`content/_index.md`)
+
+**Wichtig:** Erstelle immer eine eigene `content/_index.md` in deinem Projekt, um die Meta-Description der Startseite zu setzen:
+
+```markdown
++++
+title = 'Mein CSU Ortsverband'
+description = "Offizielle Website des CSU Ortsverbands ..."
++++
+```
+
+Ohne diese Datei hat die Startseite keine sinnvolle Meta-Description, was sich negativ auf die Suchmaschinenindizierung auswirkt.
+
 ## Daten-Management (`data/`)
 
 Inhalte werden zentral im `data`-Verzeichnis verwaltet:
