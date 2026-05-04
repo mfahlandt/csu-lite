@@ -9,7 +9,7 @@
   "address" (dict "@type" "PostalAddress" "streetAddress" .Site.Params.footer.address)
   "contactPoint" (dict "@type" "ContactPoint" "contactType" "customer service" "email" .Site.Params.footer.email)
 }}
-<script type="application/ld+json">{{ $org | jsonify (dict "indent" "  ") }}</script>
+<script type="application/ld+json">{{ $org | jsonify | safeHTML }}</script>
 
 {{/* Event Schema for Termine */}}
 {{ if eq .Type "termine" }}
@@ -27,33 +27,14 @@
   "image" (slice $image)
   "description" ($.Summary | plainify)
 }}
-<script type="application/ld+json">{{ $event | jsonify (dict "indent" "  ") }}</script>
+<script type="application/ld+json">{{ $event | jsonify | safeHTML }}</script>
 {{ end }}
 {{ end }}
 
 {{/* Breadcrumb Schema */}}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {{ $url := .Permalink }}
-    {{ $name := .Title }}
-    {{ $position := 1 }}
-    {
-      "@type": "ListItem",
-      "position": {{ $position }},
-      "name": "{{ .Site.Title }}",
-      "item": "{{ .Site.BaseURL }}"
-    }
-    {{ if not .IsHome }}
-    ,{
-      "@type": "ListItem",
-      "position": 2,
-      "name": "{{ .Title }}",
-      "item": "{{ .Permalink }}"
-    }
-    {{ end }}
-  ]
-}
-</script>
+{{ $breadcrumbs := slice (dict "@type" "ListItem" "position" 1 "name" .Site.Title "item" (print .Site.BaseURL)) }}
+{{ if not .IsHome }}
+  {{ $breadcrumbs = $breadcrumbs | append (dict "@type" "ListItem" "position" 2 "name" .Title "item" (print .Permalink)) }}
+{{ end }}
+{{ $bc := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $breadcrumbs }}
+<script type="application/ld+json">{{ $bc | jsonify | safeHTML }}</script>
