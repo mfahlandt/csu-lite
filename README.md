@@ -152,7 +152,14 @@ Um externe Verbindungen (z.B. YouTube, Vimeo) datenschutzkonform zu laden:
 ```
 
 ### SEO & Meta-Tags
-Das Theme generiert automatisch Meta-Tags, Canonical URLs und Schema.org Structured Data. Du kannst globale Keywords definieren:
+Das Theme generiert automatisch Meta-Tags, Canonical URLs und Schema.org Structured Data:
+
+*   **Organization-Schema** (auf allen Seiten)
+*   **Article-Schema** (auf `/aktuelles/`-Einzelseiten – für Google Rich Results)
+*   **Event-Schema** (auf `/termine/`-Einzelseiten)
+*   **BreadcrumbList-Schema** (auf allen Unterseiten)
+
+Du kannst globale Keywords definieren:
 
 ```toml
 [params]
