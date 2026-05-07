@@ -11,6 +11,22 @@
 }}
 {{ printf `<script type="application/ld+json">%s</script>` ($org | jsonify) | safeHTML }}
 
+{{/* ItemList Schema for "aktuelles" section (list page) – enables Google carousel */}}
+{{ if and (eq .Type "aktuelles") (not .IsPage) }}
+{{ $items := slice }}
+{{ $pos := 1 }}
+{{ range (where .Site.RegularPages "Type" "aktuelles") }}
+  {{ $items = $items | append (dict "@type" "ListItem" "position" $pos "url" (print .Permalink)) }}
+  {{ $pos = add $pos 1 }}
+{{ end }}
+{{ $itemList := dict
+  "@context" "https://schema.org"
+  "@type" "ItemList"
+  "itemListElement" $items
+}}
+{{ printf `<script type="application/ld+json">%s</script>` ($itemList | jsonify) | safeHTML }}
+{{ end }}
+
 {{/* Article Schema for "aktuelles" posts */}}
 {{ if and (eq .Type "aktuelles") .IsPage }}
 {{ $image := .Site.Params.ogImage | absURL }}
