@@ -1,18 +1,37 @@
-{{/* Global Organization Schema (Political Party) – built with jsonify for correct encoding */}}
+{{/* Global Organization Schema – uses "Organization" which Google supports for Rich Results */}}
 {{ $org := dict
   "@context" "https://schema.org"
-  "@type" "PoliticalParty"
+  "@type" "Organization"
   "name" .Site.Title
   "url" (print .Site.BaseURL)
-  "logo" (.Site.Params.logo | absURL)
+  "logo" (dict "@type" "ImageObject" "url" (.Site.Params.logo | absURL))
   "description" .Site.Params.description
   "address" (dict "@type" "PostalAddress" "streetAddress" .Site.Params.footer.address)
   "contactPoint" (dict "@type" "ContactPoint" "contactType" "customer service" "email" .Site.Params.footer.email)
 }}
-<script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>
+{{ printf `<script type="application/ld+json">%s</script>` ($org | jsonify) | safeHTML }}
+
+{{/* Article Schema for "aktuelles" posts */}}
+{{ if and (eq .Type "aktuelles") .IsPage }}
+{{ $image := .Site.Params.ogImage | absURL }}
+{{ with .Params.image }}{{ $image = . | absURL }}{{ end }}
+{{ $article := dict
+  "@context" "https://schema.org"
+  "@type" "Article"
+  "headline" .Title
+  "datePublished" (.Date.Format "2006-01-02T15:04:05-07:00")
+  "dateModified" (.Lastmod.Format "2006-01-02T15:04:05-07:00")
+  "author" (dict "@type" "Organization" "name" .Site.Title "url" (print .Site.BaseURL))
+  "publisher" (dict "@type" "Organization" "name" .Site.Title "logo" (dict "@type" "ImageObject" "url" (.Site.Params.logo | absURL)))
+  "description" ((.Description | default (.Summary | plainify)) | truncate 160)
+  "image" (slice $image)
+  "mainEntityOfPage" (dict "@type" "WebPage" "@id" (print .Permalink))
+}}
+{{ printf `<script type="application/ld+json">%s</script>` ($article | jsonify) | safeHTML }}
+{{ end }}
 
 {{/* Event Schema for Termine */}}
-{{ if eq .Type "termine" }}
+{{ if and (eq .Type "termine") .IsPage }}
 {{ with .Params.event_date }}
 {{ $image := $.Site.Params.logo | absURL }}
 {{ with $.Params.image }}{{ $image = . | absURL }}{{ end }}
@@ -23,11 +42,12 @@
   "startDate" (print .)
   "eventStatus" "https://schema.org/EventScheduled"
   "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
-  "location" (dict "@type" "Place" "name" $.Params.location "address" (dict "@type" "PostalAddress" "addressLocality" "Schirnding" "addressCountry" "DE"))
+  "location" (dict "@type" "Place" "name" ($.Params.location | default "Schirnding") "address" (dict "@type" "PostalAddress" "addressLocality" "Schirnding" "addressCountry" "DE"))
   "image" (slice $image)
-  "description" ($.Summary | plainify)
+  "description" ($.Summary | plainify | truncate 160)
+  "organizer" (dict "@type" "Organization" "name" $.Site.Title "url" (print $.Site.BaseURL))
 }}
-<script type="application/ld+json">{{ $event | jsonify | safeJS }}</script>
+{{ printf `<script type="application/ld+json">%s</script>` ($event | jsonify) | safeHTML }}
 {{ end }}
 {{ end }}
 
@@ -37,4 +57,4 @@
   {{ $breadcrumbs = $breadcrumbs | append (dict "@type" "ListItem" "position" 2 "name" .Title "item" (print .Permalink)) }}
 {{ end }}
 {{ $bc := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $breadcrumbs }}
-<script type="application/ld+json">{{ $bc | jsonify | safeJS }}</script>
+{{ printf `<script type="application/ld+json">%s</script>` ($bc | jsonify) | safeHTML }}
